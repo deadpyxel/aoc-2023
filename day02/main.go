@@ -78,6 +78,32 @@ func solvePart1(lines []string, constraint *GameSet) (int, error) {
 	return aocutils.Sum(gameIds), nil
 }
 
+func solvePart2(lines []string) (int, error) {
+	totalProd := 0
+	for _, line := range lines {
+		// Extract Game info from line
+		g, err := processLine(line)
+		if err != nil {
+			return 0, err
+		}
+		minR, minG, minB := 0, 0, 0
+		// For each subset of a game, checks if our current minimum is below the needed cubes for this set
+		// if that is the case, update the minimums
+		for _, set := range g.GameSets {
+			if set.NumRed > minR {
+				minR = set.NumRed
+			}
+			if set.NumGreen > minG {
+				minG = set.NumGreen
+			}
+			if set.NumBlue > minB {
+				minB = set.NumBlue
+			}
+		}
+		totalProd += aocutils.Product(minR, minG, minB)
+	}
+	return totalProd, nil
+}
 func main() {
 	lines, err := aocutils.ParseInput("day02.txt")
 	if err != nil {
@@ -88,4 +114,10 @@ func main() {
 		log.Fatalf("Error solving problem 2-1: %v", err)
 	}
 	fmt.Printf("Solution for Problem 2-1: %d\n", sol)
+
+	sol, err = solvePart2(lines)
+	if err != nil {
+		log.Fatalf("Error solving problem 2-2: %v", err)
+	}
+	fmt.Printf("Solution for Problem 2-2: %d\n", sol)
 }
