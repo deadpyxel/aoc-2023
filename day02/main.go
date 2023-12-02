@@ -37,16 +37,14 @@ func processLine(line string) (*Game, error) {
 			if err != nil {
 				return nil, err
 			}
-			if strings.Contains(colorData[1], "red") {
+			switch colorData[1] {
+			case "red":
 				amountR = amount
-			}
-			if strings.Contains(colorData[1], "green") {
+			case "green":
 				amountG = amount
-			}
-			if strings.Contains(colorData[1], "blue") {
+			case "blue":
 				amountB = amount
 			}
-
 		}
 		set := GameSet{NumRed: amountR, NumGreen: amountG, NumBlue: amountB}
 		sets = append(sets, set)
