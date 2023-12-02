@@ -34,3 +34,11 @@ func Sum(values []int) int {
 	}
 	return sum
 }
+
+func Product(values ...int) int {
+	prod := 1
+	for _, v := range values {
+		prod *= v
+	}
+	return prod
+}
