@@ -62,7 +62,6 @@ func solvePart2(lines []string) (int, error) {
 		matchIdx[i] = -1
 	}
 	for i, line := range lines {
-		c := processLine(line)
 		cardMatches := 0
 
 		// For each card (original or copy) check for matches
@@ -72,6 +71,8 @@ func solvePart2(lines []string) (int, error) {
 				addCopies(matchIdx[i], i, cardCopies)
 				continue
 			}
+			// Else, lets process the card and find the number of matches
+			c := processLine(line)
 			for _, num := range c.CardNumbers {
 				if slices.Contains(c.WinningNumbers, num) {
 					cardMatches++
