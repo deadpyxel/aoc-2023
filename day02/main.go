@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/deadpyxel/aod-2023/pkg/aocutils"
+	"github.com/deadpyxel/aoc-2023/pkg/aocutils"
 )
 
 type GameSet struct {
