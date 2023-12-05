@@ -2,7 +2,10 @@ package aocutils
 
 import (
 	"bufio"
+	"fmt"
 	"os"
+	"strconv"
+	"strings"
 )
 
 // ParseInput takes a file path and returns all lines of the file and returns a slice of strings where each
@@ -41,4 +44,24 @@ func Product(values ...int) int {
 		prod *= v
 	}
 	return prod
+}
+
+func Split(input, sep string) (string, string, error) {
+	parts := strings.Split(input, sep)
+	if len(parts) != 2 {
+		return "", "", fmt.Errorf("Split did not result in two parts, check separator and input string")
+	}
+	return parts[0], parts[1], nil
+}
+
+func StrToIntSlice(nums []string) ([]int, error) {
+	var intNums []int
+	for _, num := range nums {
+		intNum, err := strconv.Atoi(num)
+		if err != nil {
+			return nil, err
+		}
+		intNums = append(intNums, intNum)
+	}
+	return intNums, nil
 }
